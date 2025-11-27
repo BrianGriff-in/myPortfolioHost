@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe | Portfolio</title>
+    <meta name="description" content="John Doe - Full-Stack Web Developer Portfolio. Projects, skills, and contact form.">
+    <style>
+        :root {
+            --bg: #f4f4f4;
+            --text: #333;
+            --card: white;
+            --header-bg: #333;
+            --header-text: white;
+            --accent: #4CAF50;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg: #121212;
+            --text: #e0e0e0;
+            --card: #1e1e1e;
+            --header-bg: #1a1a1a;
+            --header-text: white;
+            --accent: #66bb6a;
+            --shadow: rgba(0,0,0,0.4);
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        html {
+            scroll-padding-top: 80px;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 8px 15px;
+        }
+
+        nav ul li a {
+            color: var(--header-text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--header-text);
+        }
+
+        section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--accent), #45a049);
+            color: white;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin: 0 0 20px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+        }
+
+        #about img {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 5px solid var(--accent);
+            margin: 20px 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .project {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+        }
+
+        .project h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+
+        .project a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .project a:hover {
+            background: #388e3c;
+        }
+
+        #contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        #contact label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+
+        #contact input,
+        #contact textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: var(--card);
+            color: var(--text);
+            box-sizing: border-box;
+        }
+
+        #contact button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        #contact button:hover {
+            background: #388e3c;
+        }
+
+        .error {
+            color: #e74c3c;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .status {
+            margin-top: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 { font-size: 2.2rem; }
+            .theme-toggle { position: static; margin-top: 10px; }
+            nav ul { flex-direction: column; }
+        }
+
+        @media (max-width: 480px){
+            .projects-grid { gap: 15px; padding: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <button class="theme-toggle" aria-label="Toggle dark mode" id="themeToggle">🌙</button>
+        <h1>John Doe</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h2>Hi, I'm John Doe</h2>
+        <p>Full-Stack Web Developer | JavaScript Enthusiast | Building beautiful and functional websites</p>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <img src="https://via.placeholder.com/200?text=John+Doe" alt="John Doe">
+        <p>I'm a passionate developer who loves turning ideas into reality with clean code and modern technologies. I work with HTML, CSS, JavaScript, React, Node.js, and more. When I'm not coding, you'll find me exploring new tech or enjoying the outdoors.</p>
+    </section>
+
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
+            <div class="project">
+                <h3>E-Commerce Platform</h3>
+                <p>Full-stack online store with user accounts, cart system, and Stripe payments.</p>
+                <a href="#" target="_blank" aria-label="View E-Commerce Project Live">View Live 🌐</a>
+            </div>
+            <div class="project">
+                <h3>TaskFlow App</h3>
+                <p>Beautiful task manager with drag-and-drop, dark mode, and local storage.</p>
+                <a href="#" target="_blank" aria-label="View TaskFlow App Project Live">View Live 🌐</a>
+            </div>
+            <div class="project">
+                <h3>Weather Dashboard</h3>
+                <p>Real-time weather app with geolocation and 7-day forecast using OpenWeather API.</p>
+                <a href="#" target="_blank" aria-label="View Weather Dashboard Project Live">View Live 🌐</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form id="contactForm">
+            <label for="name">Name
+                <input type="text" id="name" required>
+                <span class="error" id="nameError"></span>
+            </label>
+            <label for="email">Email
+                <input type="email" id="email" required>
+                <span class="error" id="emailError"></span>
+            </label>
+            <label for="message">Message
+                <textarea id="message" rows="5" required></textarea>
+                <span class="error" id="messageError"></span>
+            </label>
+            <button type="submit">Send Message</button>
+            <div class="status" id="statusMessage"></div>
+        </form>
+    </section>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+        })();
+    </script>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        body.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            }
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Form Validation and EmailJS
+        const form = document.getElementById('contactForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const statusMessage = document.getElementById('statusMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let valid = true;
+            statusMessage.textContent = '';
+            document.querySelectorAll('.error').forEach(el => el.textContent = '');
+
+            if (!nameInput.value.trim()) {
+                document.getElementById('nameError').textContent = 'Name is required';
+                valid = false;
+            }
+            if (!emailInput.value.trim() || !emailInput.checkValidity()) {
+                document.getElementById('emailError').textContent = 'Valid email is required';
+                valid = false;
+            }
+            if (!messageInput.value.trim()) {
+                document.getElementById('messageError').textContent = 'Message is required';
+                valid = false;
+            }
+
+            if (valid) {
+                const submitButton = form.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+
+                emailjs.send("service_rb00abk", "service_rb00abk", {
+                    from_name: nameInput.value,
+                    from_email: emailInput.value,
+                    message: messageInput.value
+                })
+                .then(function(response) {
+                    statusMessage.style.color = 'var(--accent)';
+                    statusMessage.textContent = 'Thank you! Your message has been sent.';
+                    form.reset();
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Send Message';
+                }, function(error) {
+                    statusMessage.style.color = '#e74c3c';
+                    statusMessage.textContent = 'Oops! Something went wrong. Please try again later.';
+                    console.error(error);
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Send Message';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
